@@ -22,9 +22,9 @@ class _BarcodeListState extends State<BarcodeListPage> {
                 Barcode barcode = Barcode.fromDs(snapshot.data.documents[index]);
                 return Column(
                   children: [
-                    Text("ID: " + (index+1).toString()),
-                    Text("Code: " + barcode.barcode),
-                    Text("Date: " + barcode.date.toDate().toString())
+                    Text("ID: " + (index+1).toString(), style: TextStyle(color: Colors.green),),
+                    Text("Code: " + barcode.barcode, style: TextStyle(color: Colors.red),),
+                    Text("Date: " + barcode.date.toDate().toString(), style: TextStyle(color: Colors.blue),)
                   ],
                 );
               });
