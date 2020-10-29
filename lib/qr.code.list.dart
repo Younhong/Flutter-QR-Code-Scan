@@ -1,30 +1,31 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_qr_code/barcode.model.dart';
+import 'package:flutter_qr_code/qr.code.model.dart';
 
-class BarcodeListPage extends StatefulWidget {
-  _BarcodeListState createState() => _BarcodeListState();
+class QRCodeListPage extends StatefulWidget {
+  _QRCodeListState createState() => _QRCodeListState();
 }
 
-class _BarcodeListState extends State<BarcodeListPage> {
+class _QRCodeListState extends State<QRCodeListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("바코드 태그 기록 조회"),
+        title: Text("QRCode 태그 기록 조회"),
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: Firestore.instance.collection("Barcode").snapshots(),
+        stream: Firestore.instance.collection("QRCode").snapshots(),
         builder: (BuildContext context, snapshot) {
+          if (!snapshot.hasData) return Container();
           return ListView.builder(
               itemCount: snapshot.data.documents.length,
               itemBuilder: (context, index) {
-                Barcode barcode = Barcode.fromDs(snapshot.data.documents[index]);
+                 QRCode qrCode = QRCode.fromDs(snapshot.data.documents[index]);
                 return Column(
                   children: [
                     Text("ID: " + (index+1).toString(), style: TextStyle(color: Colors.green),),
-                    Text("Code: " + barcode.barcode, style: TextStyle(color: Colors.red),),
-                    Text("Date: " + barcode.date.toDate().toString(), style: TextStyle(color: Colors.blue),)
+                    Text("Code: " + qrCode.qrCode, style: TextStyle(color: Colors.red),),
+                    Text("Date: " + qrCode.date.toDate().toString(), style: TextStyle(color: Colors.blue),)
                   ],
                 );
               });

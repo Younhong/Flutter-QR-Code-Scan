@@ -1,19 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Barcode {
-  String barcode;
+class QRCode {
+  String qrCode;
   Timestamp date;
 
-  Barcode({this.barcode, this.date});
+  QRCode({this.qrCode, this.date});
 
-  Barcode.fromDs(DocumentSnapshot ds) {
-    this.barcode = ds['barcode'];
+  QRCode.fromDs(DocumentSnapshot ds) {
+    this.qrCode = ds['qrCode'];
     this.date = ds['date'];
   }
 
   Map<String, dynamic> toMap() {
     return {
-      'barcode': barcode,
+      'qrCode': qrCode,
       'date': date
     };
   }

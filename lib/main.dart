@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_qr_code/barcode.list.dart';
+import 'package:flutter_qr_code/qr.code.list.dart';
 import 'package:qrscan/qrscan.dart' as scanner;
 
 void main() {
@@ -39,7 +39,7 @@ class _MyAppState extends State<MyApp> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => BarcodeListPage(),
+                            builder: (context) => QRCodeListPage(),
                           ));
                     })
               ]
@@ -63,9 +63,9 @@ class _MyAppState extends State<MyApp> {
                           return _createAlertDialog(context);
                         }),
                         Firestore.instance
-                            .collection('Barcode')
+                            .collection('QRCode')
                             .document()
-                            .setData({'barcode': _output, 'date': Timestamp.now().toDate()})
+                            .setData({'qrCode': _output, 'date': Timestamp.now().toDate()})
                       })
                       : Container(),
                 ],
@@ -97,7 +97,7 @@ class _MyAppState extends State<MyApp> {
           borderRadius: BorderRadius.all(Radius.circular(5.0))),
       content: SingleChildScrollView(
         child: Text(
-          "Saved Barcode Scan Data",
+          "Saved QRCode Scan Data",
           style: TextStyle(height: 1.4, fontSize: 15.0),
         ),
       ),
