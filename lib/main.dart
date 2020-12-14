@@ -25,7 +25,12 @@ class _MyAppState extends State<MyApp> {
             body: ListView(
               children: [
                 GestureDetector(
-                  child: Text("Scan QR Code"),
+                  child: Container(
+                    padding: EdgeInsets.only(
+                      left: 30, top: 30
+                    ),
+                    child: Text("Scan QR Code"),
+                  ),
                   onTap: () {
                     Navigator.push(
                         context,
@@ -35,7 +40,12 @@ class _MyAppState extends State<MyApp> {
                   },
                 ),
                 GestureDetector(
-                  child: Text("Generate QR Code"),
+                  child: Container(
+                    padding: EdgeInsets.only(
+                        left: 30, top: 30
+                    ),
+                    child: Text("Generate QR Code"),
+                  ),
                   onTap: () {
                     Navigator.push(
                         context,
@@ -45,7 +55,12 @@ class _MyAppState extends State<MyApp> {
                   },
                 ),
                 GestureDetector(
-                  child: Text("View All QR Code"),
+                  child: Container(
+                    padding: EdgeInsets.only(
+                        left: 30, top: 30
+                    ),
+                    child: Text("View All QR Code"),
+                  ),
                   onTap: () {
                     Navigator.push(
                         context,

@@ -9,8 +9,8 @@ class QRCodeGenerator extends StatefulWidget {
 
 class _QRCodeGeneratorState extends State<QRCodeGenerator> {
   bool didMakeQRCode = false;
-  String qrInput = "younhong@kakao.com";
   String uid = "ssss";
+  final TextEditingController _textController = TextEditingController();
 
   @override
   void initState() {
@@ -25,40 +25,60 @@ class _QRCodeGeneratorState extends State<QRCodeGenerator> {
       ),
       body: ListView(
         children: [
-          Text("Enter Text to Create QR Code"),
+          Container(
+              padding: EdgeInsets.only(left: 20, right: 20),
+              child: TextField(
+                autofocus: true,
+                autocorrect: false,
+                controller: _textController,
+                maxLines: 1,
+                style: TextStyle(
+                    color: Colors.black, fontSize: 16.0),
+                cursorColor: Colors.grey,
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  fillColor: Colors.red,
+                  hintText: "바코드를 생성할 텍스트를 입력해주세요",
+                  hintStyle: TextStyle(
+                      color: Colors.grey, fontSize: 16.0),),
+              )
+          ),
+
+          SizedBox(height: 30),
           FlatButton(
             child: Text("View QRCode"),
             onPressed: () {
               setState(() {
-                didMakeQRCode = !didMakeQRCode;
+                didMakeQRCode = true;
               });
             },
           ),
-          didMakeQRCode ? Container(
+          _textController.text != "" ? Container(
+            alignment: Alignment.center,
             child: QrImage(
-                data: qrInput,
+                data: _textController.text,
                 size: 200
             ),
           ) : Container(),
+          SizedBox(height: 30),
           FlatButton(
             child: Text("Save QRCode"),
-            onPressed: () {
+            onPressed: () => _textController.text != "" ? {
               Firestore.instance
                   .collection('QRCode')
-                  .document(qrInput)
-                  .setData({'qrCode': qrInput});
-              DateTime date = Timestamp.now().toDate();
+                  .document(_textController.text)
+                  .setData({'qrCode': _textController.text}),
               Firestore.instance
                   .collection('QRCode')
-                  .document(qrInput)
+                  .document(_textController.text)
                   .collection("Record")
-                  .document(date.toString())
+                  .document(Timestamp.now().toString())
                   .setData({
                 'uid': uid,
-                'date': date
-              });
-              Navigator.pop(context);
-            },
+                'date': Timestamp.now().toDate()
+              }),
+              Navigator.pop(context)
+            } : null,
           )
         ],
       )
