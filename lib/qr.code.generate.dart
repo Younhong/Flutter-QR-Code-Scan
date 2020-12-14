@@ -1,9 +1,6 @@
-import 'dart:async';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-import 'package:qrscan/qrscan.dart' as scanner;
 
 class QRCodeGenerator extends StatefulWidget {
   @override
@@ -12,6 +9,8 @@ class QRCodeGenerator extends StatefulWidget {
 
 class _QRCodeGeneratorState extends State<QRCodeGenerator> {
   bool didMakeQRCode = false;
+  String qrInput = "younhong@kakao.com";
+  String uid = "ssss";
 
   @override
   void initState() {
@@ -26,18 +25,39 @@ class _QRCodeGeneratorState extends State<QRCodeGenerator> {
       ),
       body: ListView(
         children: [
-          Text("Enter Text"),
+          Text("Enter Text to Create QR Code"),
+          FlatButton(
+            child: Text("View QRCode"),
+            onPressed: () {
+              setState(() {
+                didMakeQRCode = !didMakeQRCode;
+              });
+            },
+          ),
           didMakeQRCode ? Container(
             child: QrImage(
-                data: "https://www.github.com",
+                data: qrInput,
                 size: 200
             ),
           ) : Container(),
-          GestureDetector(
+          FlatButton(
             child: Text("Save QRCode"),
-            onTap: () {
-              didMakeQRCode = !didMakeQRCode;
-              print(didMakeQRCode);
+            onPressed: () {
+              Firestore.instance
+                  .collection('QRCode')
+                  .document(qrInput)
+                  .setData({'qrCode': qrInput});
+              DateTime date = Timestamp.now().toDate();
+              Firestore.instance
+                  .collection('QRCode')
+                  .document(qrInput)
+                  .collection("Record")
+                  .document(date.toString())
+                  .setData({
+                'uid': uid,
+                'date': date
+              });
+              Navigator.pop(context);
             },
           )
         ],

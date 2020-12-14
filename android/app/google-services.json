@@ -1,34 +1,33 @@
 {
   "project_info": {
-    "project_number": "20301420709",
-    "firebase_url": "https://qrcode-63553.firebaseio.com",
-    "project_id": "qrcode-63553",
-    "storage_bucket": "qrcode-63553.appspot.com"
+    "project_number": "841043902589",
+    "project_id": "qr-code-scanner-3090a",
+    "storage_bucket": "qr-code-scanner-3090a.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:20301420709:android:b27997c5bcc22a319a954c",
+        "mobilesdk_app_id": "1:841043902589:android:a49c54d3f7bf3401b37114",
         "android_client_info": {
           "package_name": "com.example.flutter_qr_code"
         }
       },
       "oauth_client": [
         {
-          "client_id": "20301420709-2phq2p37pl8jajbijt5ki17njbqr447n.apps.googleusercontent.com",
+          "client_id": "841043902589-9cq1g5sn47r0kbpo2gen3u26e1p5aviq.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBgGapJMy0gAjTR26T8vxILy_LI-vxsauM"
+          "current_key": "AIzaSyDBz_5g3RNgfv_v9W9MtNFDNSF1bUvxO90"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "20301420709-2phq2p37pl8jajbijt5ki17njbqr447n.apps.googleusercontent.com",
+              "client_id": "841043902589-9cq1g5sn47r0kbpo2gen3u26e1p5aviq.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
