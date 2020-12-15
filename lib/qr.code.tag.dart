@@ -11,7 +11,7 @@ class QRCodeTag extends StatefulWidget {
 
 class _QRCodeTagState extends State<QRCodeTag> {
   bool didSelectBarcode = false;
-  String _output = "Empty Scan Code";
+  String _output = "";
   String uid = "ssss";
 
   @override
@@ -31,32 +31,50 @@ class _QRCodeTagState extends State<QRCodeTag> {
         builder: (BuildContext context) {
           return Column(
             children: [
-              Text(
-                _output, style: TextStyle(
-                  color: Colors.black
-              ),),
+              Container(
+                padding: EdgeInsets.only(top: 50),
+                alignment: Alignment.center,
+                child: Text(
+                  "Scanned Barcode", style: TextStyle(
+                    color: Colors.red,
+                    fontSize: 30
+                ),),
+              ),
               didSelectBarcode
-                  ? FlatButton(
-                child: Text("Save QRCode"),
-                onPressed: () {
+                  ? Container(
+                padding: EdgeInsets.only(top: 20, bottom: 70),
+                child: Text(
+                  _output, style: TextStyle(
+                    color: Colors.black
+                ),),
+              ): Container(
+                padding: EdgeInsets.only(top: 20, bottom: 70),
+                child: Text(
+                  "Empty Result", style: TextStyle(
+                    color: Colors.black
+                ),),
+              ),
+              FlatButton(
+                child: Text("Save QRCode", style: TextStyle(
+                  fontSize: 20
+                ),),
+                onPressed: () => didSelectBarcode ? {
                   Firestore.instance
                       .collection('QRCode')
                       .document(_output)
-                      .setData({'qrCode': _output});
-                  DateTime date = Timestamp.now().toDate();
+                      .setData({'qrCode': _output}),
                   Firestore.instance
                       .collection('QRCode')
                       .document(_output)
                       .collection("Record")
-                      .document(date.toString())
+                      .document(Timestamp.now().toDate().toString())
                       .setData({
                     'uid': uid,
-                    'date': date
-                  });
-                  Navigator.pop(context);
-                },
+                    'date': Timestamp.now().toDate()
+                  }),
+                  Navigator.pop(context)
+                } : null,
               )
-                  : Container(),
             ],
           );
         },

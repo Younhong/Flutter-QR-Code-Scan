@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_qr_code/model/qr.code.model.dart';
 import 'package:flutter_qr_code/qr.code.record.list.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 class QRCodeListPage extends StatefulWidget {
   _QRCodeListState createState() => _QRCodeListState();
@@ -25,15 +26,19 @@ class _QRCodeListState extends State<QRCodeListPage> {
                 return GestureDetector(
                   child: Column(
                     children: [
+                      QrImage(
+                          data: qrCode.qrCode,
+                          size: 200
+                      ),
                       Container(
-                        padding: EdgeInsets.only(left: 10, top: 10),
-                        alignment: Alignment.topLeft,
+                        padding: EdgeInsets.only(top: 10),
+                        alignment: Alignment.center,
                         child: Text(
                           "ID: " + (index+1).toString(), style: TextStyle(color: Colors.green),),
                       ),
                       Container(
-                        padding: EdgeInsets.only(left: 10, top: 10, bottom: 10),
-                        alignment: Alignment.topLeft,
+                        padding: EdgeInsets.only(top: 10, bottom: 20),
+                        alignment: Alignment.center,
                         child: Text(
                           "Code: " + qrCode.qrCode, style: TextStyle(color: Colors.red),),
                       ),

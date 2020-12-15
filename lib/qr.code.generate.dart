@@ -9,7 +9,6 @@ class QRCodeGenerator extends StatefulWidget {
 
 class _QRCodeGeneratorState extends State<QRCodeGenerator> {
   bool didMakeQRCode = false;
-  String uid = "ssss";
   final TextEditingController _textController = TextEditingController();
 
   @override
@@ -26,7 +25,8 @@ class _QRCodeGeneratorState extends State<QRCodeGenerator> {
       body: ListView(
         children: [
           Container(
-              padding: EdgeInsets.only(left: 20, right: 20),
+            padding: EdgeInsets.only(left: 60, right: 60, top: 40),
+            alignment: Alignment.center,
               child: TextField(
                 autofocus: true,
                 autocorrect: false,
@@ -43,40 +43,34 @@ class _QRCodeGeneratorState extends State<QRCodeGenerator> {
                       color: Colors.grey, fontSize: 16.0),),
               )
           ),
-
-          SizedBox(height: 30),
+          SizedBox(height: 10),
           FlatButton(
             child: Text("View QRCode"),
             onPressed: () {
               setState(() {
-                didMakeQRCode = true;
+                if (_textController.text.length > 0) {
+                  didMakeQRCode = true;
+                } else {
+                  didMakeQRCode = false;
+                }
               });
             },
           ),
-          _textController.text != "" ? Container(
+          didMakeQRCode ? Container(
             alignment: Alignment.center,
             child: QrImage(
                 data: _textController.text,
                 size: 200
             ),
           ) : Container(),
-          SizedBox(height: 30),
+          SizedBox(height: 10),
           FlatButton(
             child: Text("Save QRCode"),
-            onPressed: () => _textController.text != "" ? {
+            onPressed: () => didMakeQRCode ? {
               Firestore.instance
                   .collection('QRCode')
                   .document(_textController.text)
                   .setData({'qrCode': _textController.text}),
-              Firestore.instance
-                  .collection('QRCode')
-                  .document(_textController.text)
-                  .collection("Record")
-                  .document(Timestamp.now().toString())
-                  .setData({
-                'uid': uid,
-                'date': Timestamp.now().toDate()
-              }),
               Navigator.pop(context)
             } : null,
           )
