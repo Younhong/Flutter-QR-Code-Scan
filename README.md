@@ -4,7 +4,7 @@
 ![Generator](screenshot/generate_qr_code.png)
 
 # Scan QR Code
-[!][Scanner Demo](screenshot/scan_demo.gif)
+![Scanner Demo](screenshot/scan_demo.gif)
 
 # View All QR Code
 ![Generator](screenshot/view_all.png)
