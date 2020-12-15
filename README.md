@@ -1,16 +1,18 @@
-# flutter_qr_code
+# Flutter QR Code Scanner
 
-A new Flutter application.
+# Generate your own qr code
+![Generator](screenshot/generate_qr_code.png)
 
-## Getting Started
+# Scan QR Code
+[!][Scanner Demo](screenshot/scan_demo.gif)
 
-This project is a starting point for a Flutter application.
+# View All QR Code
+![Generator](screenshot/view_all.png)
 
-A few resources to get you started if this is your first Flutter project:
+# Check Tag Record
+![Generator](screenshot/view_detail.png)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+# TODO
+Add Login Function and manage by user
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Feel Free to use this code and develop
